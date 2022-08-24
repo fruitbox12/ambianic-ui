@@ -22,7 +22,7 @@
                 class="headline"
                 ref="headline-title"
               >
-                Welcome to Ambianic.ai
+                
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
