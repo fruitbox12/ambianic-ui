@@ -103,7 +103,7 @@
             :src="`https://chr15m.github.io/bugout/#bQGTA9rJV5bX7fSYBvPAtHEb1Ch468dYqM`"
             width="100%"
             height="100%"
-            frameborder="1"  @load="load" v-show="iframe.loaded">
+            frameborder="1">
            </iframe>
     </div>
 </template>
@@ -427,17 +427,5 @@ export default {
     }
   }
 }
-new Vue({
-  el: '#container',
-  data: {
-  	iframe: {
-    	src: 'https://chr15m.github.io/bugout/#bQGTA9rJV5bX7fSYBvPAtHEb1Ch468dYqM',
-      loaded: false
-    }
-  },
-  methods: {
-		load: function(){
-    	this.iframe.loaded = true;
-    }
-  }
+
 </script>
