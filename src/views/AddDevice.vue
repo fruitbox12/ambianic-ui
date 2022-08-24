@@ -335,6 +335,14 @@ export default {
       console.debug('User selected device:', this.selectedLocalDevice, this.edgePeerId)
       await this.deviceConnect()
     },
+    async connectStepCompleted () {
+      console.debug('connectStepCompleted() called')
+      // fetch device info and update vuex state
+      //await this.fetchEdgeDetails()
+      // switch current device reference in UI state (vuex store)
+      await this.setCurrentDevice(this.edgePeerId)
+      this.addDeviceStep++
+    },
     /**
      * User clicked Connect to a remote device
      */
@@ -360,7 +368,7 @@ b.on("server", function() {
   b.rpc("ping", {"Hello": "world"}, log("response:"));
   // watch for {"Hello": "world", "pong": true} in the log below
   // show a simple UI for testing the server API
-  await connectStepCompleted() 
+   connectStepCompleted() 
 });
 
 // also watch for other peers joining this server's swarm
@@ -393,14 +401,7 @@ b.on("seen", log("seen:"));
     /**
      * Connection step completed.
      */
-    async connectStepCompleted () {
-      console.debug('connectStepCompleted() called')
-      // fetch device info and update vuex state
-      //await this.fetchEdgeDetails()
-      // switch current device reference in UI state (vuex store)
-      await this.setCurrentDevice(this.edgePeerId)
-      this.addDeviceStep++
-    },
+    
     async fetchEdgeDetails () {
       try {
         const details = await this.pnp.edgeAPI.getEdgeStatus()
