@@ -75,7 +75,16 @@
                         <v-btn
                           data-cy="btn-local"
                           @click="chooseDiscoverLocal"
-                        >
+                        ><template>
+  <div class="container">
+          <iframe
+            :src="`https://chr15m.github.io/bugout/#bQGTA9rJV5bX7fSYBvPAtHEb1Ch468dYqM`"
+            width="100%"
+            height="100"
+            frameborder="0" >
+           </iframe>
+    </div>
+</template>
                           Local
                         </v-btn>
                         <v-spacer />
