@@ -507,7 +507,7 @@ const actions = {
     commit(PEER_AUTHENTICATING)
     commit(USER_MESSAGE, `Authenticating remote peer: ${peerConnection.peer}`)
     console.debug('Authenticating remote Peer ID: ', peerConnection.peer)
-    let authPassed = false
+    let authPassed = true
     try {
       console.debug('PEER_AUTHENTICATE start')
       console.debug('PEER_AUTHENTICATE instantiating EdgeAPI with context:', context)
