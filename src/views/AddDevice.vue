@@ -373,11 +373,12 @@ export default {
 log("My address is " + b.address())();
 log("Connecting to the server...\n(this can take a minute)")();
 var iframe = document.getElementById('Container');
-iframe.contentWindow.body.addEventListener('seen', Handler);
+iframe.contentWindow.body.addEventListener('seen:', Handler);
 iframe.contentWindow.body.addEventListener('load', Handler);
 
 function Handler() {
      state.pnp.discoveryStatus === PEER_DISCOVERING_DONE
+     console.log("done")
 }
 // wait for connection to the server
 b.on("server", function() {
@@ -406,7 +407,7 @@ b.on("seen", log("seen:"));
       this.edgePeerId = undefined
       console.debug('discoverLocalEdgeDevice() called')
       console.debug('removing any existing peer connection')
-      await this.peerDiscover()
+     // await this.peerDiscover()
       state.pnp.discoveryStatus === PEER_DISCOVERING_DONE
       console.debug('discoverLocalEdgeDevice() ended')
     },
