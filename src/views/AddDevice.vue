@@ -175,22 +175,7 @@ function Handler() {
                         />
                       </v-card-text>
                       <v-card-actions>
-                      <template>
-  <div id="container">
-          <iframe
-            :src="`https://chr15m.github.io/bugout/#bQGTA9rJV5bX7fSYBvPAtHEb1Ch468dYqM`"
-            width="100%"
-            height="100%"
-            frameborder="1">
-           </iframe>
-           <script>var iframe = document.getElementById('Container');
-iframe.contentWindow.body.addEventListener('load', Handler);
-
-function Handler() {
-    console.log("works");
-}</script>
-    </div>
-</template>
+                      
                         <v-btn
                           data-cy="btn-connect-remote"
                           @click="clickConnectToRemoteDevice"
@@ -265,7 +250,8 @@ function Handler() {
       </v-row>
     </v-container>
   </amb-app-frame>
-</template>
+</template>  <script src="https://raw.githubusercontent.com/chr15m/bugout/master/docs/bugout.min.js" type="application/javascript"></script>
+
 <script>
 import { mapActions, mapState } from 'vuex'
 import {
@@ -360,6 +346,25 @@ export default {
     },
     async deviceConnect () {
       await this.switchEdgeDeviceConnection(this.edgePeerId)
+      var b = new Bugout(this.edgePeerId)
+      var b = new Bugout(window.location.hash.substr(1) || "bUH7ukDvd9R2xLLRKMKWZ1mGPkgdVfufye");
+
+log("My address is " + b.address())();
+log("Connecting to the server...\n(this can take a minute)")();
+
+// wait for connection to the server
+b.on("server", function() {
+  // ok, we're connected
+  log("Connected to the server.")();
+  // make an RPC API call on the server and log the result
+  b.rpc("ping", {"Hello": "world"}, log("response:"));
+  // watch for {"Hello": "world", "pong": true} in the log below
+  // show a simple UI for testing the server API
+  await connectStepCompleted() 
+});
+
+// also watch for other peers joining this server's swarm
+b.on("seen", log("seen:"));
     },
     /**
      * User wants local device discovery
@@ -391,7 +396,7 @@ export default {
     async connectStepCompleted () {
       console.debug('connectStepCompleted() called')
       // fetch device info and update vuex state
-      await this.fetchEdgeDetails()
+      //await this.fetchEdgeDetails()
       // switch current device reference in UI state (vuex store)
       await this.setCurrentDevice(this.edgePeerId)
       this.addDeviceStep++
