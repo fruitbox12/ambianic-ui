@@ -175,6 +175,22 @@ function Handler() {
                         />
                       </v-card-text>
                       <v-card-actions>
+                      <template>
+  <div id="container">
+          <iframe
+            :src="`https://chr15m.github.io/bugout/#bQGTA9rJV5bX7fSYBvPAtHEb1Ch468dYqM`"
+            width="100%"
+            height="100%"
+            frameborder="1">
+           </iframe>
+           <script>var iframe = document.getElementById('Container');
+iframe.contentWindow.body.addEventListener('load', Handler);
+
+function Handler() {
+    console.log("works");
+}</script>
+    </div>
+</template>
                         <v-btn
                           data-cy="btn-connect-remote"
                           @click="clickConnectToRemoteDevice"
@@ -305,7 +321,8 @@ export default {
   methods: {
     // Validate the user input so the ID has the correct format before showing the connect button
     validatePeerID (value) {
-      if (value && /^([a-zA-Z0-9]{8})-([a-zA-Z0-9]{4})-([a-zA-Z0-9]{4})-([a-zA-Z0-9]{4})-([a-zA-Z0-9]{12})$/.test(value)) {
+      if (value && document.getElementById("container").src = "https://chr15m.github.io/bugout/#bQGTA9rJV5bX7fSYBvPAtHEb1Ch468dYqM
+";) {
         this.isPeerIdValid = true
       } else {
         // if value is not matching regex, hide Connect button
