@@ -198,6 +198,7 @@ function Handler() {
                         >
                           Connect
                         </v-btn>
+                        
                       </v-card-actions>
                     </v-card>
                   </v-stepper-content>
@@ -321,7 +322,7 @@ export default {
   methods: {
     // Validate the user input so the ID has the correct format before showing the connect button
     validatePeerID (value) {
-      if (value && document.getElementById("container").src == "https://chr15m.github.io/bugout/#bQGTA9rJV5bX7fSYBvPAtHEb1Ch468dYqM";) {
+      if (value) {
         this.isPeerIdValid = true
       } else {
         // if value is not matching regex, hide Connect button
