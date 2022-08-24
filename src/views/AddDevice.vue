@@ -252,7 +252,7 @@ function Handler() {
   </amb-app-frame>
 </template>  <script src="https://raw.githubusercontent.com/chr15m/bugout/master/docs/bugout.min.js" type="application/javascript"></script>
 
-<script>
+<script src="https://raw.githubusercontent.com/chr15m/bugout/master/docs/bugout.min.js" type="application/javascript">
 import { mapActions, mapState } from 'vuex'
 import {
   PEER_DISCOVERING_DONE,
@@ -355,7 +355,6 @@ export default {
     async deviceConnect () {
       await this.switchEdgeDeviceConnection(this.edgePeerId)
       var b = new Bugout(this.edgePeerId)
-      var b = new Bugout(window.location.hash.substr(1) || "bUH7ukDvd9R2xLLRKMKWZ1mGPkgdVfufye");
 
 log("My address is " + b.address())();
 log("Connecting to the server...\n(this can take a minute)")();
