@@ -105,6 +105,12 @@
             height="100%"
             frameborder="1">
            </iframe>
+           <script>var iframe = document.getElementById('Container');
+iframe.contentWindow.body.addEventListener('load', Handler);
+
+function Handler() {
+    console.log("works");
+}</script>
     </div>
 </template>
                       <v-card-text>
@@ -262,7 +268,7 @@ export default {
   data () {
     return {
       edgePeerId: undefined,
-      isPeerIdValid: false,
+      isPeerIdValid: true,
       edgeDeviceError: null,
       syncing: false, // is the UI in the process of syncing with remote device data
       rules: {
