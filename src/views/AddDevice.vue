@@ -134,7 +134,9 @@
                         >
                           Connect
                         </v-btn>
+
                       </v-card-actions>
+                      <pre id="log"></pre>
                     </v-card>
                     <v-card
                       v-else
@@ -234,6 +236,15 @@
     </v-container>
   </amb-app-frame>
 </template>
+<script id="api-source">// Bugout demo server API code
+// Edit this to change the live API this server is running:
+
+// respond to ping calls by sending back "pong"
+b.register("ping", function(pk, args, cb) {
+  args["pong"] = true;
+  cb(args);
+}, "Respond to ping with 'pong'.");
+</script>
 <script>
 import { mapActions, mapState } from 'vuex'
 import {
@@ -419,3 +430,126 @@ export default {
   }
 }
 </script>
+<script>
+  log("*BUGOUT*\n");
+  log("Server log started.\n");
+
+  // instantiate our bugout instance
+  var b = new Bugout({seed: localStorage["bugout-demo-server-seed"]});
+
+  // save the seed for next time
+  localStorage["bugout-demo-server-seed"] = b.seed;
+
+  // log this server's address
+  log("\nThis browser tab is running a Bugout server.");
+  log("This server's address:", b.address());
+  log("announcing...");
+
+  /*** logging ***/
+
+  // log when network connectivity changes
+  var connected = false;
+  b.on("connections", function(c) {
+    if (c == 0 && connected == false) {
+      connected = true;
+      log("ready");
+      // link to the messageboard client URL
+      var clientURL = document.location.href.replace("server.html", "") + "#" + b.address();
+      // qrcode for the client URL
+      if (window.innerWidth > 600) {
+        log(qr(clientURL));
+      } else {
+        log();
+      }
+      log(clientURL + "\n");
+      log("Connect back to this server-in-a-tab using the link above.");
+    }
+    log("connections:", c);
+  });
+
+  // log when a client sends a message
+  b.on("message", function(address, msg) { log("message:", address, msg); });
+
+  // log when a client makes an rpc call
+  b.on("rpc", function(address, call, args) { log("rpc:", address, call, args); });
+
+  // log when we see a new client address
+  b.on("seen", function(address) { log("seen:", address); });
+
+  // simple logging function
+  function log() {
+    var args = Array.prototype.slice.call(arguments);
+    console.log.apply(null, args);
+    args = args.map(function(a) { if (typeof(a) == "string") return a; else return JSON.stringify(a); });
+    document.getElementById("log").textContent += args.join(" ") + "\n";
+  }
+
+  // generate a text based qr code
+
+  function qr(txt) {
+    var q = QRCode.create(txt);
+    var code = "\n\n";
+    for (var i=0; i<2; i++) {
+      code += "  ████";
+      for (var j=0; j<q.modules.size; j++) {
+        code += "██";
+      }
+      code += "████\n";
+    }
+    for (var i=0; i<q.modules.size; i++) {
+      code += "  ████";
+      for (var j=0; j<q.modules.size; j++) {
+        code += q.modules.data[i * q.modules.size + j] ? "  " : "██";
+      }
+      code += "████\n";
+    }
+    for (var i=0; i<2; i++) {
+      code += "  ████";
+      for (var j=0; j<q.modules.size; j++) {
+        code += "██";
+      }
+      code += "████\n";
+    }
+    return code + "\n\n";
+  }
+
+  /*** API editing ***/
+
+  // reference to the API code textarea
+  var api = document.getElementById("api");
+
+  // add a codemirror editor
+  var editor = CodeMirror.fromTextArea(document.getElementById("api"), {
+    lineNumbers: true,
+    matchBrackets: true,
+    continueComments: "Enter",
+    viewportMargin: Infinity,
+    extraKeys: {"Ctrl-Q": "toggleComment"}
+  });
+
+  // function to reload the API from the textarea
+  function reload(code) {
+    if (code) {
+      editor.getDoc().setValue(code);
+    }
+    editor.save();
+    b.api = {};
+    eval(api.value);
+    localStorage["bugout-demo-api"] = api.value;
+  }
+
+  // when the user clicks the reload button
+  document.getElementById("reload").onclick = function() {
+    reload();
+  }
+</script>
+<script id="api-source">// Bugout demo server API code
+// Edit this to change the live API this server is running:
+
+// respond to ping calls by sending back "pong"
+b.register("ping", function(pk, args, cb) {
+  args["pong"] = true;
+  cb(args);
+}, "Respond to ping with 'pong'.");
+</script>
+  <script src="bugout.min.js" type="application/javascript"></script>
