@@ -281,12 +281,12 @@ export default {
           to: 'settings'
         },
         {
-          text: 'Select Device',
+          text: 'Create a Deployment',
           disabled: false,
           to: 'selectdevice'
         },
         {
-          text: 'Add Device',
+          text: 'Add Repository',
           disabled: true,
           to: 'adddevice'
         }
@@ -325,7 +325,7 @@ export default {
       console.debug('clickConnectToDiscoveredDevice() called')
       this.addDeviceStep++
       this.edgePeerId = this.discoveredPeers[this.selectedLocalDevice]
-      console.debug('User selected device:', this.selectedLocalDevice, this.edgePeerId)
+      console.debug('User selected repository:', this.selectedLocalDevice, this.edgePeerId)
       await this.deviceConnect()
     },
     /**
