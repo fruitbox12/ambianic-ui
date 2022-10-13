@@ -30,7 +30,7 @@ export default {
       if (this.edgePeerId) {
         this.setCurrentDevice(this.edgePeerId)
       }
-      console.debug('App created. Edge PeerID, currentDeviceCard:', this.edgePeerId, this.currentDeviceCard)
+      console.debug('Deployment created')
     })
   }
 }
