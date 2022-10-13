@@ -22,7 +22,7 @@
                 class="headline"
                 ref="headline-title"
               >
-                Welcome to Ambianic.ai
+                Welcome to the Cloud
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -40,18 +40,13 @@
                 src="@/assets/home-screen-logo-dark.png"
                 ref="logo-image"
               />
-              <v-img
-                v-else
-                src="@/assets/home-screen-logo-light.png"
-                ref="logo-image"
-              />
+             
             </v-avatar>
             <p />
             <v-list-item-subtitle
               class="center"
               data-cy="subtitle-one"
             >
-              Safer Home via Ambient Intelligence.
             </v-list-item-subtitle>
             <v-list-item-subtitle
               class="center"
