@@ -31,27 +31,12 @@
             id="welcome-text"
             class="text-center"
           >
-            <v-avatar
-              rounded
-              size="200"
-            >
-              <v-img
-                v-if="this.$vuetify.theme.dark"
-                src="@/assets/home-screen-logo-dark.png"
-                ref="logo-image"
-              />
-              <v-img
-                v-else
-                src="@/assets/home-screen-logo-light.png"
-                ref="logo-image"
-              />
-            </v-avatar>
             <p />
             <v-list-item-subtitle
               class="center"
               data-cy="subtitle-one"
             >
-              Safer Home via Ambient Intelligence.
+              Safer Home via Multi-Access Edge Computing.
             </v-list-item-subtitle>
             <v-list-item-subtitle
               class="center"
@@ -115,5 +100,6 @@ export default {
   align-items : center;
   width : 100%;
   height: 100vh;
+  background-color: #97B9FF;
 }
 </style>
